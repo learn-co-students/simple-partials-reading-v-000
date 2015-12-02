@@ -85,3 +85,5 @@ That in a nutshell is how form_for works.
 
 other form builders, select_tag, hidden_tag, etc.
 options to pass to form_for, most important is URL
+
+<a href='https://learn.co/lessons/rails-form_for-on-edit-readme' data-visibility='hidden'>View this lesson on Learn.co</a>
