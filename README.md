@@ -42,7 +42,7 @@ A good rule of thumb for when to use one approach over the other is below:
 
 Let's take the `edit` form that utilized the `form_tag` that we built before for `posts` and refactor it to use `form_for`. As a refresher, here is the `form_tag` version:
 
-```ERB
+```erb
 <% # app/views/posts/edit.html.erb %>
 <h3>Post Form</h3>
 
@@ -59,13 +59,13 @@ Let's take the `edit` form that utilized the `form_tag` that we built before for
 
 Let's take this refactor one element at a time. Since we already have access to the `@post` instance variable we know that we can pass that to the `form_for` method, we also can remove the path argument and the `method` call, since `form_for` will automatically set these for us. How does `form_for` know that we want to use `PUT` for the form method? It's smart enough to know that since it's dealing with a pre-existing record that you want to utilize `PUT` over `POST`.
 
-```ERB
+```erb
 <%= form_for(@post) do |f| %>
 ```
 
 The `|f|` is an iterator variable that we can use on the new form object that will allow us to dynamically assign form field elements to each of the `post` data attributes, along with auto filling the values for each field. We get this `ActionView` functionality because we're using the `form_form` method and that gives us access to the `FormBuilder` module in Rails ([Documentation](http://api.rubyonrails.org/classes/ActionView/Helpers/FormBuilder.html)). Inside of the form we can now refactor the fields:
 
-```ERB
+```erb
 <label>Post title:</label><br>
 <%= f.text_field :title %><br>
 
@@ -75,13 +75,13 @@ The `|f|` is an iterator variable that we can use on the new form object that wi
 
 Isn't that much cleaner? Notice how we no longer have to pass in the values manually? By passing in the attribute as a symbol (e.g. `:title`) that will automatically tell the form field what model attribute to be associated with, it also is what auto fills the values for us. Now let's refactor the submit button, instead of `<%= submit_tag "Submit Post" %>` we can change it to:
 
-```ERB
+```erb
 <%= f.submit %>
 ```
 
 Lastly, `form_for` also automatically sets the `authenticity_token` value for us, so we can remove the `<%= hidden_field_tag :authenticity_token, form_authenticity_token %>` line completely. Our new form will look something like this:
 
-```ERB
+```erb
 <h3>Post Form</h3>
 
 <%= form_for(@post) do |f| %>
