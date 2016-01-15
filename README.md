@@ -1,49 +1,36 @@
-# `form_for` on Edit
+## Objectives
+1. Understand why partails are used.
+2. Use rails's `render` method to do create a partial
+3. Understand how a name of a partial turns into it's filename
+4. Understand how to reference partials from an external folder
 
-If you know how to utilize the `form_tag` method for creating forms in Rails you may wonder why you need to learn a new form building process. Let's imagine that you've been tasked with creating the world's first pet hamster social network, and one of the requirements is that the hamster profile page needs to have about 100 different form fields that can be edited. If you are using the `form_for` method, your application will be technically resubmitting all 100 fields each time you edit the data. Your form view templates will also have 100 calls to the `@hamster` instance variable and each of the hamster attributes. Thankfully `form_for` is here and will help clean up the form view template and provide some additional benefits that we'll explore in this lesson.
+## Introduction
 
+As you know, while coding we are generally trying to not repeat our code.  If we see a repeated chunk of code in different methods, we sometimes extract that chunk of code into its own method, which we can than reference in multiple places.
 
-## Recap of `form_tag`
+We can apply a similar tool to reduce repetition in html.  Partials are view-level files, that only form one part of an html page (get it? part, partial??).  By using a partial, we can remove repeated pieces of html, and add better organization to the code in our views.  
 
-To review, the `form_tag` helper method allows us to automatically generate HTML form code and integrate data to both auto fill the values as well as have the form submit data that the controller can use to either create or update a record in the database. It allows for you to pass in: the route for where the parameters for the form will be sent, the HTTP method that the form will utilize, and the attributes for each field.
+Let's look at an example to see what this means.
 
+## Example
 
-## Issues with using `form_tag`
+Take a look at the code used in the [form for on edit readme](https://github.com/learn-co-curriculum/rails-form_for-on-edit-readme).  
 
-Before we get into the benefits and features of the `form_for` method, let's first discuss some of the key drawbacks to utilizing `form_tag`:
+This is the code in the new form app/views/posts/new.html.erb
+```
+<%= form_tag posts_path do %>
+  <label>Post title:</label><br>
+  <%= text_field_tag :title %><br>
 
-* Our form has to manually be passed the route for where the form parameters will be submitted
+  <label>Post Description</label><br>
+  <%= text_area_tag :description %><br>
 
-* The form has no knowledge of the form's goal, it doesn't know if the form is meant to create or update a record
-
-* You're forced to have duplicate code throughout the form, it's hard to adhere to DRY principles when utilizing the `form_tag`
-
-
-## Difference between `form_for` and `form_tag`
-
-The differences between `form_for` and `form_tag` are subtle, but important, below is a basic breakdown of the differences, we'll start with talking about them at a high level perspective and then get into each one of the aspects on a practical/implementation basis:
-
-* The `form_for` method accepts the instance of the model as an argument. Using this argument, `form_for` is able to make a bunch of assumptions for you.
-
-* `form_for` yields an object of class `FormBuilder`
-
-* `form_for` automatically knows the standard route (it follows RESTful conventions) for the form data as opposed to having to manually declare it
-
-* `form_for` gives the option to dynamically change the `submit` button text (this comes in very handy when you're using a form partial and the `new` and `edit` pages will share the same form, but more on that in a later lesson)
-
-A good rule of thumb for when to use one approach over the other is below:
-
-* Use `form_for` when your form is directly connected to a model, extending our example from the introduction, this would be our Hamster's profile edit form that connects to the profile database table. This is the most common case when `form_for` is used
-
-* User `form_tag` when you simply need an HTML form generated, examples of this would be: a search form field or a contact form
-
-
-## Implementation of `form_for`
-
-Let's take the `edit` form that utilized the `form_tag` that we built before for `posts` and refactor it to use `form_for`. As a refresher, here is the `form_tag` version:
+  <%= submit_tag "Submit Post" %>
+<% end %>
+```
+And this is the code in the edit file app/views/posts/edit.html.erb
 
 ```erb
-<% # app/views/posts/edit.html.erb %>
 <h3>Post Form</h3>
 
 <%= form_tag post_path(@post), method: "put" do %>
@@ -52,96 +39,59 @@ Let's take the `edit` form that utilized the `form_tag` that we built before for
 
   <label>Post Description</label><br>
   <%= text_area_tag :description, @post.description %><br>
-  
+
+  <%= submit_tag "Submit Post" %>
+<% end %>
+```
+Oh man, except for the first line of the form, it's like twinsies!  The labels and field tags are all the same.  Yea, so all of that duplication is not good in code.  Duplication means twice the amount of code to maintain, twice the opportunity for bugs, and two differing forms where our interface should be consistent.  Let's get rid of the duplicated code.
+
+So instead of duplicating all of that code, we just want to write that code once in a file that contains all of that code (our partial) and call it from both our edit and show files. Here's how:
+
+1. Create a new file in the `app/views/posts/` called `_form.html.erb`
+To demarcate that this file is a partial, and only part of a larger view, we precede the filename with an underscore.
+2. Remove the duplicated code from the `app/views/posts/edit.html.erb` and the `app/views/posts/new.html.erb` files and place it in the `app/views/posts/_form.html.erb` file.
+3. Render the code into the posts/edit and posts/new pages by using placing `<%= render "form" %>` where we want the code in the partial to be rendered.  Notice that while the file name of our partial starts with an underscore, when we reference our partial there is no underscore.  
+
+So now our posts/new, posts/edit, and posts/form files should look like the following:
+`app/views/posts/new.html.erb`
+```
+<%= form_tag posts_path do %>
+  <%= render 'form' %>
   <%= submit_tag "Submit Post" %>
 <% end %>
 ```
 
-Let's take this refactor one element at a time. Since we already have access to the `@post` instance variable we know that we can pass that to the `form_for` method, we also can remove the path argument and the `method` call, since `form_for` will automatically set these for us. How does `form_for` know that we want to use `PUT` for the form method? It's smart enough to know that since it's dealing with a pre-existing record that you want to utilize `PUT` over `POST`.
-
-```erb
-<%= form_for(@post) do |f| %>
+`app/views/posts/edit.html.erb`
 ```
-
-The `|f|` is an iterator variable that we can use on the new form object that will allow us to dynamically assign form field elements to each of the `post` data attributes, along with auto filling the values for each field. We get this `ActionView` functionality because we're using the `form_for` method and that gives us access to the `FormBuilder` module in Rails ([Documentation](http://api.rubyonrails.org/classes/ActionView/Helpers/FormBuilder.html)). Inside of the form we can now refactor the fields:
-
-```erb
-<label>Post title:</label><br>
-<%= f.text_field :title %><br>
-
-<label>Post Description</label><br>
-<%= f.text_area :description %><br>
-```
-
-Isn't that much cleaner? Notice how we no longer have to pass in the values manually? By passing in the attribute as a symbol (e.g. `:title`) that will automatically tell the form field what model attribute to be associated with, it also is what auto fills the values for us. Now let's refactor the submit button, instead of `<%= submit_tag "Submit Post" %>` we can change it to:
-
-```erb
-<%= f.submit %>
-```
-
-Lastly, `form_for` also automatically sets the `authenticity_token` value for us, so we can remove the `<%= hidden_field_tag :authenticity_token, form_authenticity_token %>` line completely. Our new form will look something like this:
-
-```erb
 <h3>Post Form</h3>
 
-<%= form_for(@post) do |f| %>
-  <label>Post title:</label><br>
-  <%= f.text_field :title %><br>
-
-  <label>Post Description</label><br>
-  <%= f.text_area :description %><br>
-  
-  <%= f.submit %>
+<%= form_tag post_path(@post), method: "put" do %>
+  <%= render 'form' %>
+  <%= submit_tag "Edit Post" %>
 <% end %>
 ```
 
-Our refactor work isn't quite done, if you had previously created a `PUT` route like we did in the `form_tag` lesson, we'll need to change that to a `PATCH` method since that is the HTTP verb that `form_for` utilizes, we can make that change in the `config/routes.rb` file:
 
-```ruby
-patch 'posts/:id', to: 'posts#update'
+`app/views/posts/_form.html.erb`
+```
+<label>Post title:</label><br>
+<%= text_field_tag :title, @post.title %><br>
+
+<label>Post Description</label><br>
+<%= text_area_tag :description, @post.description %><br>
 ```
 
-What's the difference between `PUT` and `PATCH`? The differences are pretty subtle, on a high level `PUT` has the ability to update the entire object, whereas `PATCH` simply updates the element that was changed. Many developers choose to utilize `PATCH` as much as possible because it requires less overhead, however it is pretty rare when you will need to distinguish between the two verbs and they are used interchangeably quite often.
+Ok - all done!
 
-You can also put in an additional argument if you're using the `resources` method for `update` and this will all happen automatically.
+Just a couple of things to note.
+1. Notice that even though the last line of the form, the `<% end %>` tag, is duplicated code, I didn't move it into my partial.  The reason for this is because it closes the beginning of the form_tag block, which DOES differ from form to form.  So I didn't like the idea of our form_tag block opening in one file, and close in a different file.  This is a stylistic point that you will get a feel for over time.
 
-Now if you start the Rails server and go to an edit page you'll see that the data is loaded into the form and everything appears to be working properly, however if you change the value of one of the form fields and click `Update post` you will see that the record isn't updated. So what's happening? When I run into behavior like this I'll usually look at the console logs to see if it tells me anything. Below is the screenshot of what I see after submitting the form:
+2. I could have named the partial whatever I want.  The only requirement is that it start with an underscore, and then reference that partial without the underscore.  But just like method names, it's good to make the names of our partials as semantic as possible.
 
-![Unpermitted Parameters](https://s3.amazonaws.com/flatiron-bucket/readme-lessons/unpermitted_params.png)
-
-Because `form_for` is bound directly with the `Post` model, we need to pass the model into update method in the controller. So let's change: `@post.update(title: params[:title], description: params[:description])` to:
-
-```ruby
-@post.update(params.require(:post))
-```
-
-So why do we need to `require` the `post`? If you look at the old form the params would look something like this:
-
-```
-{
-  "title": "My Title",
-  "description": "My description"
-}
-```
-
-With the new structure for the `form_for` the params look like this:
-
-```
-{
-  "post": {
-            "title": "My Title",
-            "description": "My description"
-          }
-}
-```
-
-Notice how the attributes are now encapsulated in the `"post"` object? That's the main reason we needed to add the `require` method.
-
-Now if you go back to the `edit` page and submit the form, the record will be updated in the dataabse sucessfully.
+3. I was able to reference the partial by just calling `<%= render 'form' %>`.  Notice that I didn't specify the folder that my partial lived in like `<%= render 'posts/form' %>`.  The reason I didn't need this (while it would have worked if I did include it), is because both my `posts/new` and my `posts/edit` files are referencing a partial from the same folder they live in, the `app/views/posts` folder.  When referencing a partial from a different folder, we must include the folder name as well (eg. `<%= render 'posts/form' %>` as opposed to just `<%= render 'form' %>`).
 
 
-## Summary
+Note to Curriculum team.  I am unclear of the learning goals of this last part.  If the point is to show referencing partials from outside files, we can just reference a post, in an author's view which feels more intuitive to me.  Or we can say we want to allow users to create post from the welcome page as well.  Currently we don't have any category model, or controller.  So seems easier ways to get this point across.
+ * Create a category display partial and put it in the category folder. Display it via the posts show action. Make sure you are just using the instance variables. It's going to feel icky
 
-Nice work, you now know how to integrate multiple form helpers into a Rails application and you should have a good idea on when to properly use `form_form` vs `form_tag`.
-
-<a href='https://learn.co/lessons/rails-form_for-on-edit-readme' data-visibility='hidden'>View this lesson on Learn.co</a>
+<a href='https://learn.co/lessons/simple-partials-reading' data-visibility='hidden'>View this lesson on Learn.co</a>
