@@ -1,8 +1,5 @@
 tags:
-  - rails
-  - partials
+  - tag1
 languages:
-  - ruby
-  - rails
-resources:
-  - 0
+  - language1
+resources: 0
