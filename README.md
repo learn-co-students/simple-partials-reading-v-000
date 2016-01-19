@@ -115,11 +115,11 @@ Finally, our partial the posts/form file looks like the following:
 Ok - all done!
 
 Just a couple of things to note.
-1. Notice that even though the last line of the form, the `<% end %>` tag, is duplicated code, I didn't move it into my partial.  The reason for this is because it closes the beginning of the form_tag block, which DOES differ from form to form.  So I didn't like the idea of our form_tag block opening in one file, and close in a different file.  This is a stylistic point that you will get a feel for over time.
+1. Notice that even though the last line of the form, the `<% end %>` tag, is duplicated code, we didn't move it into my partial.  The reason for this is because it closes the beginning of the form_tag block, which DOES differ from form to form.  So we didn't want to open our form_tag block in one file, and close in a different file.  This is a stylistic point that you will get a feel for over time.
 
-2. I could have named the partial whatever I want.  The only requirement is that it start with an underscore, and then reference that partial without the underscore.  But just like method names, it's good to make the names of our partials as semantic as possible.
+2. We could have named the partial whatever we wanted to.  The only requirement is that it start with an underscore, and then reference that partial without the underscore.  But just like method names, it's good to make the names of our partials as semantic as possible.
 
-3. I was able to reference the partial by just calling `<%= render 'form' %>`.  Notice that I didn't specify the folder that my partial lived in like `<%= render 'posts/form' %>`.  The reason I didn't need this (while it would have worked if I did include it), is because both my `posts/new` and my `posts/edit` files are referencing a partial from the same folder they live in, the `app/views/posts` folder.  When referencing a partial from a different folder, we must include the folder name as well (eg. `<%= render 'posts/form' %>` as opposed to just `<%= render 'form' %>`).
+3. We was able to reference the partial by just calling `<%= render 'form' %>`.  Notice that we didn't specify the folder that my partial lived in like `<%= render 'posts/form' %>`.  The reason we didn't need this (while it would have worked if we did include it), is because both my `posts/new` and my `posts/edit` files are referencing a partial from the same folder they live in, the `app/views/posts` folder.  When referencing a partial from a different folder, we must include the folder name as well (eg. `<%= render 'posts/form' %>` as opposed to just `<%= render 'form' %>`).
 
 Let's do this now.  
 
