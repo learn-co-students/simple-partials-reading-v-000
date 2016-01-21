@@ -1,8 +1,8 @@
 ## Objectives
 1. Understand why partials are used.
-2. Use rails's `render` method to do create a partial
-3. Understand how a name of a partial turns into it's filename
-4. Understand how to reference partials from an external folder
+2. Use rails's `render` method to render a partial
+3. Understand how the name of a partial turns into it's filename
+4. Understand how to reference partials located in an external folder
 
 ## Introduction
 
@@ -17,13 +17,13 @@ Let's look at an example to see what this means.
 Take a look at the code above.
 
 This is the code in the new form app/views/posts/new.html.erb
-```
+```erb
 <%= form_tag posts_path do %>
   <label>Post title:</label><br>
-  <%= text_field_tag :title %><br>
+  <%= text_field_tag :title, @post.title %><br>
 
   <label>Post Description</label><br>
-  <%= text_area_tag :description %><br>
+  <%= text_area_tag :description, @post.description %><br>
 
   <%= submit_tag "Submit Post" %>
 <% end %>
@@ -61,7 +61,7 @@ Second, let's remove the repeated code in `app/views/posts/edit.html.erb` so now
 Note that we left in the non-duplicated code.  Now, let's also remove the duplicated code in the
 `app/views/posts/new.html.erb` file.  Now this file should look like:
 
-```
+```erb
 <%= form_tag posts_path do %>
 <% end %>
 ```
@@ -71,7 +71,7 @@ So now what?  It looks like we are missing a bunch of code in our 'posts/new' an
 
 First, we'll place the duplicated code in a new file called `app/views/posts/_form.html.erb`. The file should look like the following:
 `app/views/posts/_form.html.erb`
-```
+```erb
   <label>Post title:</label><br>
   <%= text_field_tag :title, @post.title %><br>
 
@@ -84,32 +84,32 @@ Now we need to render the code into the posts/edit and posts/new pages by using 
 
 So now our posts/new file should look like this:
 `app/views/posts/new.html.erb`
-```
+```erb
 <%= form_tag posts_path do %>
   <%= render 'form' %>
-  <%= submit_tag "Submit Post" %>
 <% end %>
 ```
 
 And our posts/edit file should look like this:
 `app/views/posts/edit.html.erb`
-```
+```erb
 <h3>Post Form</h3>
 
 <%= form_tag post_path(@post), method: "put" do %>
   <%= render 'form' %>
-  <%= submit_tag "Edit Post" %>
 <% end %>
 ```
 
-Finally, our partial the posts/form file looks like the following:
+Finally, our partial, the posts/form file looks like the following:
 `app/views/posts/_form.html.erb`
-```
+```erb
 <label>Post title:</label><br>
 <%= text_field_tag :title, @post.title %><br>
 
 <label>Post Description</label><br>
 <%= text_area_tag :description, @post.description %><br>
+
+<%= submit_tag "Submit Post" %>
 ```
 
 Ok - all done!
@@ -119,22 +119,22 @@ Just a couple of things to note.
 
 2. We could have named the partial whatever we wanted to.  The only requirement is that it start with an underscore, and then reference that partial without the underscore.  But just like method names, it's good to make the names of our partials as semantic as possible.
 
-3. We was able to reference the partial by just calling `<%= render 'form' %>`.  Notice that we didn't specify the folder that my partial lived in like `<%= render 'posts/form' %>`.  The reason we didn't need this (while it would have worked if we did include it), is because both my `posts/new` and my `posts/edit` files are referencing a partial from the same folder they live in, the `app/views/posts` folder.  When referencing a partial from a different folder, we must include the folder name as well (eg. `<%= render 'posts/form' %>` as opposed to just `<%= render 'form' %>`).
+3. We were able to reference the partial by just calling `<%= render 'form' %>`.  Notice that we didn't specify the folder that my partial lived in like `<%= render 'posts/form' %>`.  The reason we didn't need this (while it would have worked if we did include it), is because both my `posts/new` and my `posts/edit` files are referencing a partial from the same folder they live in, the `app/views/posts` folder.  When referencing a partial from a different folder, we must include the folder name as well (eg. `<%= render 'posts/form' %>` as opposed to just `<%= render 'form' %>`).
 
 Let's do this now.  
 
 ## Rendering a partial from a different file
 
-Ok, so take a look at the `authors/show.html.erb` file.
+Let's take a look at our `authors/show.html.erb` file.
 
-```
+```erb
 <%= @author.name %>
 <%= @author.hometown %>
 ```
 
 And now look at the code in `posts/show.html.erb`
 
-```
+```erb
 <%= @post.author.name %>
 <%= @post.author.hometown %>
 
@@ -147,7 +147,7 @@ First let's make a new partial called `app/views/authors/_author.html.erb` and p
 file so that it looks like the following:
 
 `app/views/authors/_author.html.erb`
-```
+```erb
 <%= @author.name %>
 <%= @author.hometown %>
 ```
@@ -155,13 +155,13 @@ file so that it looks like the following:
 Now we can just call this file in our authors/show page by doing the following:
 
 `app/views/authors/show.html.erb`
-```
+```erb
 <%= render 'author' %>
 ```
 Ok, so now that our authors/show page looks the same, let's take care of the repetition in the post section.  This is what we'll do.  Right now, the posts/show looks like this:
 
 `app/views/posts/show.html.erb`
-```
+```erb
 <%= @post.author.name %>
 <%= @post.author.hometown %>
 
@@ -172,7 +172,7 @@ So see that?  We can replace the first two lines with a call to our partial.  Ma
 
 
 `app/views/posts/show.html.erb`
-```
+```erb
 <%= render 'author' %>
 <h1><%= @post.title %></h1>
 <p><%= @post.description %></p>
@@ -181,7 +181,7 @@ So see that?  We can replace the first two lines with a call to our partial.  Ma
 Uh oh.  This won't work, because if we don't specify the folder name, rails will assume that the partial lives in the same folder as the view that is calling that partial.  In this case, it looks for a file called posts/author and doesn't find it.  So we need to tell rails to go outside the folder, by being explicit about the folder and file name that it is rendering.  We do that by changing the code to the following:
 
 `app/views/posts/show.html.erb`
-```
+```erb
 <%= render 'author' %>
 <h1><%= @post.title %></h1>
 <p><%= @post.description %></p>
@@ -193,11 +193,11 @@ Change the posts#show action in the controller to look like the following:
 
 
 `app/views/posts/show.html.erb`
-```
-	def show
-		@post = Post.find(params[:id])
+```erb
+  def show
+    @post = Post.find(params[:id])
     @author = @post.author
-	end
+  end
 ```
 
 And now we are done! Whew!
