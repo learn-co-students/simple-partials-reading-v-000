@@ -196,7 +196,7 @@ Change the posts#show action in the controller to look like the following:
 ```erb
 	def show
 		@post = Post.find(params[:id])
-    @author = @post.author
+  @author = @post.author
 	end
 ```
 
