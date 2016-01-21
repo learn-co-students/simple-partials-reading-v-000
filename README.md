@@ -194,10 +194,10 @@ Change the posts#show action in the controller to look like the following:
 
 `app/views/posts/show.html.erb`
 ```erb
-	def show
-		@post = Post.find(params[:id])
-      @author = @post.author
-	end
+  def show
+    @post = Post.find(params[:id])
+    @author = @post.author
+  end
 ```
 
 And now we are done! Whew!
