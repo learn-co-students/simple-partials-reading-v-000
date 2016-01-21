@@ -17,7 +17,7 @@ Let's look at an example to see what this means.
 Take a look at the code above.
 
 This is the code in the new form app/views/posts/new.html.erb
-```
+```erb
 <%= form_tag posts_path do %>
   <label>Post title:</label><br>
   <%= text_field_tag :title, @post.title %><br>
@@ -61,7 +61,7 @@ Second, let's remove the repeated code in `app/views/posts/edit.html.erb` so now
 Note that we left in the non-duplicated code.  Now, let's also remove the duplicated code in the
 `app/views/posts/new.html.erb` file.  Now this file should look like:
 
-```
+```erb
 <%= form_tag posts_path do %>
 <% end %>
 ```
@@ -71,7 +71,7 @@ So now what?  It looks like we are missing a bunch of code in our 'posts/new' an
 
 First, we'll place the duplicated code in a new file called `app/views/posts/_form.html.erb`. The file should look like the following:
 `app/views/posts/_form.html.erb`
-```
+```erb
   <label>Post title:</label><br>
   <%= text_field_tag :title, @post.title %><br>
 
@@ -84,7 +84,7 @@ Now we need to render the code into the posts/edit and posts/new pages by using 
 
 So now our posts/new file should look like this:
 `app/views/posts/new.html.erb`
-```
+```erb
 <%= form_tag posts_path do %>
   <%= render 'form' %>
 <% end %>
@@ -92,7 +92,7 @@ So now our posts/new file should look like this:
 
 And our posts/edit file should look like this:
 `app/views/posts/edit.html.erb`
-```
+```erb
 <h3>Post Form</h3>
 
 <%= form_tag post_path(@post), method: "put" do %>
@@ -102,7 +102,7 @@ And our posts/edit file should look like this:
 
 Finally, our partial, the posts/form file looks like the following:
 `app/views/posts/_form.html.erb`
-```
+```erb
 <label>Post title:</label><br>
 <%= text_field_tag :title, @post.title %><br>
 
@@ -134,7 +134,7 @@ Let's take a look at our `authors/show.html.erb` file.
 
 And now look at the code in `posts/show.html.erb`
 
-```
+```erb
 <%= @post.author.name %>
 <%= @post.author.hometown %>
 
@@ -147,7 +147,7 @@ First let's make a new partial called `app/views/authors/_author.html.erb` and p
 file so that it looks like the following:
 
 `app/views/authors/_author.html.erb`
-```
+```erb
 <%= @author.name %>
 <%= @author.hometown %>
 ```
@@ -155,13 +155,13 @@ file so that it looks like the following:
 Now we can just call this file in our authors/show page by doing the following:
 
 `app/views/authors/show.html.erb`
-```
+```erb
 <%= render 'author' %>
 ```
 Ok, so now that our authors/show page looks the same, let's take care of the repetition in the post section.  This is what we'll do.  Right now, the posts/show looks like this:
 
 `app/views/posts/show.html.erb`
-```
+```erb
 <%= @post.author.name %>
 <%= @post.author.hometown %>
 
@@ -172,7 +172,7 @@ So see that?  We can replace the first two lines with a call to our partial.  Ma
 
 
 `app/views/posts/show.html.erb`
-```
+```erb
 <%= render 'author' %>
 <h1><%= @post.title %></h1>
 <p><%= @post.description %></p>
@@ -181,7 +181,7 @@ So see that?  We can replace the first two lines with a call to our partial.  Ma
 Uh oh.  This won't work, because if we don't specify the folder name, rails will assume that the partial lives in the same folder as the view that is calling that partial.  In this case, it looks for a file called posts/author and doesn't find it.  So we need to tell rails to go outside the folder, by being explicit about the folder and file name that it is rendering.  We do that by changing the code to the following:
 
 `app/views/posts/show.html.erb`
-```
+```erb
 <%= render 'author' %>
 <h1><%= @post.title %></h1>
 <p><%= @post.description %></p>
@@ -193,7 +193,7 @@ Change the posts#show action in the controller to look like the following:
 
 
 `app/views/posts/show.html.erb`
-```
+```erb
 	def show
 		@post = Post.find(params[:id])
     @author = @post.author
