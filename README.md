@@ -1,8 +1,8 @@
 ## Objectives
 1. Understand why partials are used.
-2. Use rails's `render` method to do create a partial
-3. Understand how a name of a partial turns into it's filename
-4. Understand how to reference partials from an external folder
+2. Use rails's `render` method to render a partial
+3. Understand how the name of a partial turns into it's filename
+4. Understand how to reference partials located in an external folder
 
 ## Introduction
 
@@ -20,10 +20,10 @@ This is the code in the new form app/views/posts/new.html.erb
 ```
 <%= form_tag posts_path do %>
   <label>Post title:</label><br>
-  <%= text_field_tag :title %><br>
+  <%= text_field_tag :title, @post.title %><br>
 
   <label>Post Description</label><br>
-  <%= text_area_tag :description %><br>
+  <%= text_area_tag :description, @post.description %><br>
 
   <%= submit_tag "Submit Post" %>
 <% end %>
@@ -87,7 +87,6 @@ So now our posts/new file should look like this:
 ```
 <%= form_tag posts_path do %>
   <%= render 'form' %>
-  <%= submit_tag "Submit Post" %>
 <% end %>
 ```
 
@@ -98,11 +97,10 @@ And our posts/edit file should look like this:
 
 <%= form_tag post_path(@post), method: "put" do %>
   <%= render 'form' %>
-  <%= submit_tag "Edit Post" %>
 <% end %>
 ```
 
-Finally, our partial the posts/form file looks like the following:
+Finally, our partial, the posts/form file looks like the following:
 `app/views/posts/_form.html.erb`
 ```
 <label>Post title:</label><br>
@@ -110,6 +108,8 @@ Finally, our partial the posts/form file looks like the following:
 
 <label>Post Description</label><br>
 <%= text_area_tag :description, @post.description %><br>
+
+<%= submit_tag "Submit Post" %>
 ```
 
 Ok - all done!
@@ -119,15 +119,15 @@ Just a couple of things to note.
 
 2. We could have named the partial whatever we wanted to.  The only requirement is that it start with an underscore, and then reference that partial without the underscore.  But just like method names, it's good to make the names of our partials as semantic as possible.
 
-3. We was able to reference the partial by just calling `<%= render 'form' %>`.  Notice that we didn't specify the folder that my partial lived in like `<%= render 'posts/form' %>`.  The reason we didn't need this (while it would have worked if we did include it), is because both my `posts/new` and my `posts/edit` files are referencing a partial from the same folder they live in, the `app/views/posts` folder.  When referencing a partial from a different folder, we must include the folder name as well (eg. `<%= render 'posts/form' %>` as opposed to just `<%= render 'form' %>`).
+3. We were able to reference the partial by just calling `<%= render 'form' %>`.  Notice that we didn't specify the folder that my partial lived in like `<%= render 'posts/form' %>`.  The reason we didn't need this (while it would have worked if we did include it), is because both my `posts/new` and my `posts/edit` files are referencing a partial from the same folder they live in, the `app/views/posts` folder.  When referencing a partial from a different folder, we must include the folder name as well (eg. `<%= render 'posts/form' %>` as opposed to just `<%= render 'form' %>`).
 
 Let's do this now.  
 
 ## Rendering a partial from a different file
 
-Ok, so take a look at the `authors/show.html.erb` file.
+Let's take a look at our `authors/show.html.erb` file.
 
-```
+```erb
 <%= @author.name %>
 <%= @author.hometown %>
 ```
