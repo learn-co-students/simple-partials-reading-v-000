@@ -20,10 +20,10 @@ This is the code in the new form app/views/posts/new.html.erb
 ```erb
 <%= form_tag posts_path do %>
   <label>Post title:</label><br>
-  <%= text_field_tag :title, @post.title %><br>
+  <%= text_field_tag :title %><br>
 
   <label>Post Description</label><br>
-  <%= text_area_tag :description, @post.description %><br>
+  <%= text_area_tag :description %><br>
 
   <%= submit_tag "Submit Post" %>
 <% end %>
@@ -35,10 +35,10 @@ And this is the code in the edit file app/views/posts/edit.html.erb
 
 <%= form_tag post_path(@post), method: "put" do %>
   <label>Post title:</label><br>
-  <%= text_field_tag :title, @post.title %><br>
+  <%= text_field_tag :title %><br>
 
   <label>Post Description</label><br>
-  <%= text_area_tag :description, @post.description %><br>
+  <%= text_area_tag :description %><br>
 
   <%= submit_tag "Submit Post" %>
 <% end %>
@@ -73,10 +73,10 @@ First, we'll place the duplicated code in a new file called `app/views/posts/_fo
 `app/views/posts/_form.html.erb`
 ```erb
   <label>Post title:</label><br>
-  <%= text_field_tag :title, @post.title %><br>
+  <%= text_field_tag :title %><br>
 
   <label>Post Description</label><br>
-  <%= text_area_tag :description, @post.description %><br>
+  <%= text_area_tag :description %><br>
 
   <%= submit_tag "Submit Post" %>
 ```
@@ -104,10 +104,10 @@ Finally, our partial, the posts/form file looks like the following:
 `app/views/posts/_form.html.erb`
 ```erb
 <label>Post title:</label><br>
-<%= text_field_tag :title, @post.title %><br>
+<%= text_field_tag :title %><br>
 
 <label>Post Description</label><br>
-<%= text_area_tag :description, @post.description %><br>
+<%= text_area_tag :description %><br>
 
 <%= submit_tag "Submit Post" %>
 ```
@@ -142,8 +142,19 @@ And now look at the code in `posts/show.html.erb`
 <p><%= @post.description %></p>
 ```
 
-See the repetition?  The author information is the basically the same.  Let's take care of it.
-First let's make a new partial called `app/views/authors/_author.html.erb` and place the repeated code in the
+See the repetition?  In both places we are using the author object to call the name and hometown methods.  The first thing we have to fix is the slight difference between the templates.  Let's make the beginning portion of the posts show template match the authors show template.
+
+`posts/show.html.erb`
+
+```erb
+<%= @author.name %>
+<%= @author.hometown %>
+
+<h1><%= @post.title %></h1>
+<p><%= @post.description %></p>
+```
+
+Then let's make a new partial called `app/views/authors/_author.html.erb` and place the repeated code in the
 file so that it looks like the following:
 
 `app/views/authors/_author.html.erb`
@@ -152,48 +163,40 @@ file so that it looks like the following:
 <%= @author.hometown %>
 ```
 
-Now we can just call this file in our authors/show page by doing the following:
+Now we can just render this partial in our authors/show page by doing the following:
 
 `app/views/authors/show.html.erb`
 ```erb
 <%= render 'author' %>
 ```
-Ok, so now that our authors/show page looks the same, let's take care of the repetition in the post section.  This is what we'll do.  Right now, the posts/show looks like this:
 
-`app/views/posts/show.html.erb`
-```erb
-<%= @post.author.name %>
-<%= @post.author.hometown %>
-
-<h1><%= @post.title %></h1>
-<p><%= @post.description %></p>
-```
-So see that?  We can replace the first two lines with a call to our partial.  Make the change so the posts/show looks like the following:
+We can make the same change in `app/views/posts/show.html.erb`
 
 
 `app/views/posts/show.html.erb`
 ```erb
 <%= render 'author' %>
+
 <h1><%= @post.title %></h1>
 <p><%= @post.description %></p>
 ```
 
-Uh oh.  This won't work, because if we don't specify the folder name, rails will assume that the partial lives in the same folder as the view that is calling that partial.  In this case, it looks for a file called posts/author and doesn't find it.  So we need to tell rails to go outside the folder, by being explicit about the folder and file name that it is rendering.  We do that by changing the code to the following:
+Uh oh.  This won't work, because if we don't specify the folder name, rails will assume that the partial lives in the same folder as the view that is calling that partial.  In this case, it looks for a file in the posts directory called `_author.html.erb` and doesn't find it.  So we need to tell rails to go outside the folder, by being explicit about the folder and file name that it is rendering.  We do that by changing the code to the following:
 
 `app/views/posts/show.html.erb`
 ```erb
-<%= render 'author' %>
+<%= render 'posts/author' %>
+
 <h1><%= @post.title %></h1>
 <p><%= @post.description %></p>
 ```
 
-We're almost there!  One more problem is that our partial assumes there is an instance variable called @author.  It needs it to work!  We don't want to change the partial because other code, like our authors/show relies on it.  Instead let's provide the @author instance variable in the controller.  
+We're almost there!  One more problem is that our partial assumes there is an instance variable called @author.  It needs it to work!  We'll need to change the posts controller to have it set an instance variable called @author.
 
-Change the posts#show action in the controller to look like the following:
-
+Change the `posts#show` action in the controller to look like the following:
 
 `app/views/posts/show.html.erb`
-```erb
+```ruby
   def show
     @post = Post.find(params[:id])
     @author = @post.author
@@ -201,11 +204,3 @@ Change the posts#show action in the controller to look like the following:
 ```
 
 And now we are done! Whew!
-## Instructions
-
- * Include in here the solution from [this](https://github.com/learn-co-curriculum/rails-form_for-on-edit-readme) readme. Write in an additional ability for blog posts belong to a category
- * Refactor the form stuff in new/edit to use partials with instance variables. Icky I know, but we are taking students through a journey
- * Explain how partials work
- * Create a category display partial and put it in the category folder. Display it via the posts show action. Make sure you are just using the instance variables. It's going to feel icky
-
-<a href='https://learn.co/lessons/simple-partials-reading' data-visibility='hidden'>View this lesson on Learn.co</a>
