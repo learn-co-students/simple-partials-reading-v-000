@@ -1,3 +1,4 @@
+require 'pry'
 class PostsController < ApplicationController
 	def index
 		@posts = Post.all
@@ -5,6 +6,7 @@ class PostsController < ApplicationController
 
 	def show
 		@post = Post.find(params[:id])
+		@author = @post.author
 	end
 
 	def new
@@ -15,6 +17,7 @@ class PostsController < ApplicationController
 	  @post = Post.new
 	  @post.title = params[:title]
 	  @post.description = params[:description]
+	  @post.author = Author.new
 	  @post.save
 	  redirect_to post_path(@post)
 	end
