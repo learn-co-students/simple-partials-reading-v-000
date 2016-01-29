@@ -205,3 +205,5 @@ Change the `posts#show` action in the controller to look like the following:
 ```
 
 And now we are done! Whew!
+
+<p data-visibility='hidden'>View <a href='https://learn.co/lessons/simple-partials-reading' title='Objectives'>Objectives</a> on Learn.co and start learning to code for free.</p>
