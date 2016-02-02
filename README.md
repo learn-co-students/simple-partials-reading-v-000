@@ -186,7 +186,7 @@ Uh oh.  This won't work, because if we don't specify the folder name, rails will
 
 `app/views/posts/show.html.erb`
 ```erb
-<%= render 'posts/author' %>
+<%= render 'authors/author' %>
 
 <h1><%= @post.title %></h1>
 <p><%= @post.description %></p>
