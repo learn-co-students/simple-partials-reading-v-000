@@ -5,6 +5,7 @@ class PostsController < ApplicationController
 
 	def show
 		@post = Post.find(params[:id])
+		@author = @post.author
 	end
 
 	def new
@@ -13,6 +14,8 @@ class PostsController < ApplicationController
 
 	def create
 	  @post = Post.new
+	  #require 'pry'
+	  #binding.pry
 	  @post.title = params[:title]
 	  @post.description = params[:description]
 	  @post.save
