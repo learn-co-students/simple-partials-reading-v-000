@@ -1,5 +1,6 @@
-<%= @post.author.name %>
-<%= @post.author.hometown %>
-
+<% unless @post.author.nil? %>
+	<%= render 'authors/author' %>
+<% end %>
+ 
 <h1><%= @post.title %></h1>
 <p><%= @post.description %></p>
