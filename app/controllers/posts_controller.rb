@@ -12,9 +12,11 @@ class PostsController < ApplicationController
 	end
 
 	def create
+		@author = Author.first
 	  @post = Post.new
 	  @post.title = params[:title]
 	  @post.description = params[:description]
+	  @post.author_id = @author.id
 	  @post.save
 	  redirect_to post_path(@post)
 	end
