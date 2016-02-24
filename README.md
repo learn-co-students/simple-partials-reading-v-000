@@ -15,7 +15,9 @@ Let's look at an example to see what this means.
 
 ## Example
 
-Take a look at the code above.
+Before we get started, make sure that you run `rake db:seed` to seed the database. This will give us some posts and authors. Because we want to focus on partials, you'll notice some hard-coding in the controller. In the Posts controller create action, we've hard-coded that every new post created in linked to the very first author in the database. 
+ 
+Ok, let's dive in!
 
 This is the code in the new form app/views/posts/new.html.erb
 ```erb
@@ -44,7 +46,7 @@ And this is the code in the edit file app/views/posts/edit.html.erb
   <%= submit_tag "Submit Post" %>
 <% end %>
 ```
-Except for the first line of the form, the code is pretty much the same!  The labels and field tags are the same.  All of that duplication is not good in code. Duplication means twice the amount of code to maintain, twice the opportunity for bugs, and two differing forms where our interface should be consistent.  
+Except for the first line of the form, the code is pretty much the same!  The labels and field tags are the same.  All of that duplication is not good in code. Duplication means twice the amount of code to maintain, twice the opportunity for bugs, and two differing forms where our interface should be consistent.
 
 Instead of duplicating all of that code, we just want to write that code once in a file that contains all of that code (our partial) and call it from both our edit and show files. Here's how:
 
