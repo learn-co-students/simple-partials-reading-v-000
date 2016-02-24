@@ -5,6 +5,8 @@ class PostsController < ApplicationController
 
 	def show
 		@post = Post.find(params[:id])
+		@author = Author.all.first
+		@post.author = @author
 	end
 
 	def new
