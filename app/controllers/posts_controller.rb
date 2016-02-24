@@ -12,7 +12,7 @@ class PostsController < ApplicationController
 	end
 
 	def create
-		@author = Author.first
+    @author = Author.first
 	  @post = Post.new
 	  @post.title = params[:title]
 	  @post.description = params[:description]
