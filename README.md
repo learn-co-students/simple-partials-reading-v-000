@@ -198,7 +198,7 @@ We're almost there!  One more problem is that our partial assumes there is an in
 
 Change the `posts#show` action in the controller to look like the following:
 
-`app/views/posts/show.html.erb`
+`app/controllers/posts_controller.rb`
 ```ruby
   def show
     @post = Post.find(params[:id])
