@@ -126,7 +126,7 @@ Just a couple of things to note.
 
 Let's do this now.  
 
-## Rendering a partial from a different file
+## Rendering a partial from a different folder
 
 Let's take a look at our `authors/show.html.erb` file.
 
@@ -209,3 +209,5 @@ Change the `posts#show` action in the controller to look like the following:
 And now we are done! Whew!
 
 <p data-visibility='hidden'>View <a href='https://learn.co/lessons/simple-partials-reading' title='Objectives'>Objectives</a> on Learn.co and start learning to code for free.</p>
+
+<p data-visibility='hidden'>View <a href='https://learn.co/lessons/simple-partials-reading'>Simple Partials </a> on Learn.co and start learning to code for free.</p>
