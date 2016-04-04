@@ -24,7 +24,7 @@ describe 'navigate' do
 end
 
 describe 'form' do
-  before do 
+  before do
     @author = Author.create(name: "John Grisham", hometown: "Charlottesville, VA")
     @post = Post.create(title: "My Post", description: "My post desc", author_id: @author.id)
 
