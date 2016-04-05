@@ -15,7 +15,7 @@ Let's look at an example to see what this means.
 
 ## Example
 
-Before we get started, make sure that you run `rake db:seed` to seed the database. This will give us some posts and authors. Because we want to focus on partials, you'll notice some hard-coding in the controller. In the Posts controller create action, we've hard-coded that every new post created in linked to the very first author in the database. 
+Before we get started, make sure that you run `rake db:seed` to seed the database. This will give us some posts and authors. Because we want to focus on partials, you'll notice some hard-coding in the controller. In the Posts controller create action, we've hard-coded that every new post created is linked to the very first author in the database. 
  
 Ok, let's dive in!
 
@@ -209,3 +209,5 @@ Change the `posts#show` action in the controller to look like the following:
 And now we are done! Whew!
 
 <p data-visibility='hidden'>View <a href='https://learn.co/lessons/simple-partials-reading' title='Objectives'>Objectives</a> on Learn.co and start learning to code for free.</p>
+
+<p data-visibility='hidden'>View <a href='https://learn.co/lessons/simple-partials-reading'>Simple Partials </a> on Learn.co and start learning to code for free.</p>
