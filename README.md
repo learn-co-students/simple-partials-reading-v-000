@@ -126,7 +126,7 @@ Just a couple of things to note.
 
 Let's do this now.  
 
-## Rendering a partial from a different file
+## Rendering a partial from a different folder
 
 Let's take a look at our `authors/show.html.erb` file.
 
