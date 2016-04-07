@@ -15,8 +15,9 @@ Let's look at an example to see what this means.
 
 ## Example
 
-Before we get started, make sure that you run `rake db:seed` to seed the database. This will give us some posts and authors. Because we want to focus on partials, you'll notice some hard-coding in the controller. In the Posts controller create action, we've hard-coded that every new post created in linked to the very first author in the database. 
- 
+
+Before we get started, make sure that you run `rake db:seed` to seed the database. This will give us some posts and authors. Because we want to focus on partials, you'll notice some hard-coding in the controller. In the Posts controller create action, we've hard-coded that every new post created is linked to the very first author in the database. 
+
 Ok, let's dive in!
 
 This is the code in the new form app/views/posts/new.html.erb
@@ -68,7 +69,7 @@ Note that we left in the non-duplicated code.  Now, let's also remove the duplic
 <%= form_tag posts_path do %>
 <% end %>
 ```
-So once again, we remove the code that is particular to the view, and we removed the code inside the form_tag block, as that code is duplicated.
+So once again, we left the code that is particular to the view, and we removed the code inside the form_tag block, as that code is duplicated.
 
 So now what?  It looks like we are missing a bunch of code in our 'posts/new' and 'posts/edit' files.  Not to worry, that's where our partial comes in handy.  
 
@@ -83,7 +84,7 @@ First, we'll place the duplicated code in a new file called `app/views/posts/_fo
 
   <%= submit_tag "Submit Post" %>
 ```
-Now we need to render the code into the posts/edit and posts/new pages by using placing `<%= render "form" %>` where we want the code in the partial to be rendered.  Notice that while the file name of our partial starts with an underscore, when we reference our partial there is no underscore.  
+Now we need to render the code into the posts/edit and posts/new pages by placing `<%= render "form" %>` where we want the code in the partial to be rendered.  Notice that while the file name of our partial starts with an underscore, when we reference our partial there is no underscore.  
 
 So now our posts/new file should look like this:
 `app/views/posts/new.html.erb`
@@ -126,7 +127,7 @@ Just a couple of things to note.
 
 Let's do this now.  
 
-## Rendering a partial from a different file
+## Rendering a partial from a different folder
 
 Let's take a look at our `authors/show.html.erb` file.
 
@@ -198,7 +199,7 @@ We're almost there!  One more problem is that our partial assumes there is an in
 
 Change the `posts#show` action in the controller to look like the following:
 
-`app/views/posts/show.html.erb`
+`app/controllers/posts_controller.rb`
 ```ruby
   def show
     @post = Post.find(params[:id])
@@ -209,3 +210,5 @@ Change the `posts#show` action in the controller to look like the following:
 And now we are done! Whew!
 
 <p data-visibility='hidden'>View <a href='https://learn.co/lessons/simple-partials-reading' title='Objectives'>Objectives</a> on Learn.co and start learning to code for free.</p>
+
+
