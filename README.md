@@ -68,7 +68,7 @@ Note that we left in the non-duplicated code.  Now, let's also remove the duplic
 <%= form_tag posts_path do %>
 <% end %>
 ```
-So once again, we remove the code that is particular to the view, and we removed the code inside the form_tag block, as that code is duplicated.
+So once again, we left the code that is particular to the view, and we removed the code inside the form_tag block, as that code is duplicated.
 
 So now what?  It looks like we are missing a bunch of code in our 'posts/new' and 'posts/edit' files.  Not to worry, that's where our partial comes in handy.  
 
