@@ -83,7 +83,7 @@ First, we'll place the duplicated code in a new file called `app/views/posts/_fo
 
   <%= submit_tag "Submit Post" %>
 ```
-Now we need to render the code into the posts/edit and posts/new pages by using placing `<%= render "form" %>` where we want the code in the partial to be rendered.  Notice that while the file name of our partial starts with an underscore, when we reference our partial there is no underscore.  
+Now we need to render the code into the posts/edit and posts/new pages by placing `<%= render "form" %>` where we want the code in the partial to be rendered.  Notice that while the file name of our partial starts with an underscore, when we reference our partial there is no underscore.  
 
 So now our posts/new file should look like this:
 `app/views/posts/new.html.erb`
@@ -209,3 +209,5 @@ Change the `posts#show` action in the controller to look like the following:
 And now we are done! Whew!
 
 <p data-visibility='hidden'>View <a href='https://learn.co/lessons/simple-partials-reading' title='Objectives'>Objectives</a> on Learn.co and start learning to code for free.</p>
+
+<p data-visibility='hidden'>View <a href='https://learn.co/lessons/simple-partials-reading'>Simple Partials </a> on Learn.co and start learning to code for free.</p>
