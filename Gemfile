@@ -38,6 +38,7 @@ group :development, :test do
   gem 'capybara'
   gem 'database_cleaner'
   gem 'annotate'
+        gem 'tzinfo-data', platform: [:mingw, :mswin, :x64_mingw]
 end
 
 group :development do
