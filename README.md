@@ -1,6 +1,6 @@
 ## Objectives
 
-1. Explain why partials are used.
+1. Explain why partials are used
 2. Use rails's `render` method to render a partial
 3. Describe how the name of a partial turns into it's filename
 4. Reference partials located in an external folder
