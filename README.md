@@ -1,13 +1,13 @@
 ## Objectives
 
-1. Explain why partials are used.
+1. Explain why partials are used
 2. Use rails's `render` method to render a partial
 3. Describe how the name of a partial turns into it's filename
 4. Reference partials located in an external folder
 
 ## Introduction
 
-As you know, while coding we are generally trying to not repeat our code.  If we see a repeated chunk of code in different methods, we sometimes extract that chunk of code into its own method, which we can than reference in multiple places.
+As you know, while coding we are generally trying to not repeat our code.  If we see a repeated chunk of code in different methods, we sometimes extract that chunk of code into its own method, which we can then reference in multiple places.
 
 We can apply a similar tool to reduce repetition in html.  Partials are view-level files, that only form one part of an html page (get it? part, partial??).  By using a partial we can remove repeated pieces of html and add better organization to the code in our views.  
 
@@ -210,5 +210,3 @@ Change the `posts#show` action in the controller to look like the following:
 And now we are done! Whew!
 
 <p data-visibility='hidden'>View <a href='https://learn.co/lessons/simple-partials-reading' title='Objectives'>Objectives</a> on Learn.co and start learning to code for free.</p>
-
-
