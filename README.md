@@ -1,4 +1,4 @@
-# Simple Partials
+# Simple Partialss
 
 ## Objectives
 
