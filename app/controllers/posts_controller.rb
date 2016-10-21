@@ -5,6 +5,8 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    # We need this here bc the partial wont function without an instance variable
+    @author = @post.author
   end
 
   def new
@@ -12,6 +14,7 @@ class PostsController < ApplicationController
   end
 
   def create
+    # Every new post created is linked to the very first author in the DB
     @author = Author.first
     @post = Post.new
     @post.title = params[:title]
