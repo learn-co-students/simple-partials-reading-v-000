@@ -188,6 +188,7 @@ DEPENDENCIES
   database_cleaner
   jbuilder (~> 2.0)
   jquery-rails
+  pry
   pry-byebug
   rails (= 4.2.5)
   rspec-rails (~> 3.0)
@@ -200,4 +201,4 @@ DEPENDENCIES
   web-console (~> 2.0)
 
 BUNDLED WITH
-   1.10.6
+   1.13.2
