@@ -38,6 +38,7 @@ group :development, :test do
   gem 'capybara'
   gem 'database_cleaner'
   gem 'annotate'
+  gem 'learn-co'
 end
 
 group :development do
