@@ -1,0 +1,9 @@
+<fieldset>
+  <%= label_tag :title %>
+  <%= text_field_tag :title, @post.title %>
+</fieldset>
+<fieldset>
+  <%= label_tag :description %>
+  <%= text_area_tag :description, @post.description %>  
+</fieldset>
+<%= submit_tag "Submit Post" %>
