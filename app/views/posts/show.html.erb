@@ -1,5 +1,11 @@
-<%= @post.author.name %>
-<%= @post.author.hometown %>
+<!-- <%= @author.name %>
+<%= @author.hometown %> -->
+
+
+<!-- We're almost there! One more problem is that our partial assumes it has access to an instance variable called @author. The partial won't function without it! We'll need to modify the PostsController to have it set that instance variable. -->
+
+
+<%= render 'authors/author' %>
 
 <h1><%= @post.title %></h1>
 <p><%= @post.description %></p>
