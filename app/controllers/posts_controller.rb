@@ -9,6 +9,7 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
+    @author = @post.author
   end
 
   def create
@@ -30,5 +31,5 @@ class PostsController < ApplicationController
     @post.update(title: params[:title], description: params[:description])
     redirect_to post_path(@post)
   end
-  
+
 end
