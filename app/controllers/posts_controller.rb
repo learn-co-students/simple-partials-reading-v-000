@@ -5,6 +5,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @author = @post.author
   end
 
   def new
@@ -30,5 +31,5 @@ class PostsController < ApplicationController
     @post.update(title: params[:title], description: params[:description])
     redirect_to post_path(@post)
   end
-  
+
 end
