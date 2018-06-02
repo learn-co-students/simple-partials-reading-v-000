@@ -1,5 +1,10 @@
-<%= @post.author.name %>
-<%= @post.author.hometown %>
+
+<!-- NOTE : Need to call the parent folder because the partial resides in a different folder -->
+<%= render 'authors/author' %>
+
+<!-- NOTE : Replacing below dupe code with above partial call as it also calls on the Author object -->
+<!-- <%= @post.author.name %>
+<%= @post.author.hometown %> -->
 
 <h1><%= @post.title %></h1>
 <p><%= @post.description %></p>
