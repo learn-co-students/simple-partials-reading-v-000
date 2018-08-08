@@ -1,5 +1,12 @@
-<%= @post.author.name %>
-<%= @post.author.hometown %>
+<!-- <%= @post.author.name %>
+<%= @post.author.hometown %> -->
+
+<!-- from the above, we make it equivalent -->
+<!-- <%= @author.name %>
+<%= @author.hometown %> -->
+
+<!-- rendering from view/author/_author.html.erb -->
+<%= render 'authors/author' %>
 
 <h1><%= @post.title %></h1>
 <p><%= @post.description %></p>
