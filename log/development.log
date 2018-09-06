@@ -773,3 +773,150 @@ Migrating to AddAuthorIdToPosts (20160119185429)
   [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20160119185429"]]
   [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
   [1m[35mActiveRecord::SchemaMigration Load (0.3ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (4.8ms)[0m  [1mINSERT INTO "authors" ("name", "hometown", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "John Grisham"], ["hometown", "Charlottesville, VA"], ["created_at", "2018-09-06 17:03:45.939917"], ["updated_at", "2018-09-06 17:03:45.939917"]]
+  [1m[35m (30.3ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "authors" ("name", "hometown", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["name", " Renyolds Price"], ["hometown", "Macon, NC"], ["created_at", "2018-09-06 17:03:45.977910"], ["updated_at", "2018-09-06 17:03:45.977910"]]
+  [1m[36m (20.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (2.7ms)[0m  [1mINSERT INTO "posts" ("title", "description", "author_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["title", "A Time To Kill"], ["description", "A Time to Kill is a 1989 legal suspense thriller by John Grisham. It was Grisham's first novel. The novel was rejected by many publishers before Wynwood Press (located in New York) eventually gave it a modest 5,000-copy printing. After The Firm, The Pelican Brief, and The Client became bestsellers, interest in A Time to Kill grew; the book was republished by Doubleday in hardcover and, later, by Dell Publishing in paperback, and itself became a bestseller. This made Grisham extremely popular among readers."], ["author_id", 1], ["created_at", "2018-09-06 17:03:46.016047"], ["updated_at", "2018-09-06 17:03:46.016047"]]
+  [1m[35m (21.2ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "posts" ("title", "description", "author_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["title", "A Long and Happy Life"], ["description", "A Long and Happy Life presents Rosacoke Mustian to the reading public, as well as her erstwhile boyfriend, Wesley Beavers, who gets the innocent girl pregnant. Although he condescends to marry her, he then pretty much leaves her on her own. The book is alive with local color. In one of the early, most memorable scenes, Rosacoke needs to attend a funeral at a black church on a sizzling day in summer. Her friend Mildred Sutton has died in childbirth and is to be eulogized. Wesley Beavers drives his noisy motorcycle up to deliver Rosacoke to the funeral, but he does not go inside. Instead, he lingers outside and polishes his motorcycle, which is an extension of his being. Before the services are over, he leaves precipitously to get ready for the church picnic that he and Rosacoke are to attend that afternoon. As he screeches away from the church, he raises a trail of red dust behind him that one can almost taste, so vivid is Price’s description."], ["author_id", 2], ["created_at", "2018-09-06 17:03:46.042178"], ["updated_at", "2018-09-06 17:03:46.042178"]]
+  [1m[36m (15.0ms)[0m  [1mcommit transaction[0m
+
+
+Started GET "/" for 127.0.0.1 at 2018-09-06 10:06:33 -0700
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendered /home/learn/.rvm/gems/ruby-2.3.6/gems/railties-4.2.10/lib/rails/templates/rails/welcome/index.html.erb (2.7ms)
+Completed 200 OK in 150ms (Views: 126.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/posts/1" for 127.0.0.1 at 2018-09-06 10:09:34 -0700
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mPost Load (0.2ms)[0m  SELECT  "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered posts/show.html.erb within layouts/application (15.9ms)
+Completed 500 Internal Server Error in 73ms (ActiveRecord: 0.6ms)
+
+ActionView::Template::Error (undefined method `name' for nil:NilClass):
+    1: <%= @post.author.name %>
+    2: <%= @post.author.hometown %>
+    3: 
+    4: <h1><%= @post.title %></h1>
+  app/views/posts/show.html.erb:1:in `_app_views_posts_show_html_erb___878286066__619009338'
+
+
+  Rendered /home/learn/.rvm/gems/ruby-2.3.6/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (6.7ms)
+  Rendered /home/learn/.rvm/gems/ruby-2.3.6/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.7ms)
+  Rendered /home/learn/.rvm/gems/ruby-2.3.6/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /home/learn/.rvm/gems/ruby-2.3.6/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (42.1ms)
+
+
+Started GET "/posts/new" for 127.0.0.1 at 2018-09-06 10:10:31 -0700
+Processing by PostsController#new as HTML
+  Rendered posts/new.html.erb within layouts/application (4.6ms)
+Completed 200 OK in 585ms (Views: 583.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/posts/edit" for 127.0.0.1 at 2018-09-06 10:10:38 -0700
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"edit"}
+  [1m[36mPost Load (0.1ms)[0m  [1mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT 1[0m  [["id", 0]]
+Completed 404 Not Found in 2ms (ActiveRecord: 0.1ms)
+
+ActiveRecord::RecordNotFound (Couldn't find Post with 'id'=edit):
+  app/controllers/posts_controller.rb:7:in `show'
+
+
+  Rendered /home/learn/.rvm/gems/ruby-2.3.6/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (4.2ms)
+  Rendered /home/learn/.rvm/gems/ruby-2.3.6/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.6ms)
+  Rendered /home/learn/.rvm/gems/ruby-2.3.6/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /home/learn/.rvm/gems/ruby-2.3.6/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (41.7ms)
+
+
+Started GET "/posts/1/edit" for 127.0.0.1 at 2018-09-06 10:10:44 -0700
+Processing by PostsController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mPost Load (0.1ms)[0m  SELECT  "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered posts/edit.html.erb within layouts/application (5.3ms)
+Completed 200 OK in 74ms (Views: 65.2ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/posts/1/" for 127.0.0.1 at 2018-09-06 10:10:55 -0700
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPost Load (0.1ms)[0m  [1mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered posts/show.html.erb within layouts/application (9.3ms)
+Completed 500 Internal Server Error in 23ms (ActiveRecord: 0.1ms)
+
+ActionView::Template::Error (undefined method `name' for nil:NilClass):
+    1: <%= @post.author.name %>
+    2: <%= @post.author.hometown %>
+    3: 
+    4: <h1><%= @post.title %></h1>
+  app/views/posts/show.html.erb:1:in `_app_views_posts_show_html_erb___878286066__619009338'
+
+
+  Rendered /home/learn/.rvm/gems/ruby-2.3.6/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (10.0ms)
+  Rendered /home/learn/.rvm/gems/ruby-2.3.6/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (4.2ms)
+  Rendered /home/learn/.rvm/gems/ruby-2.3.6/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (8.9ms)
+  Rendered /home/learn/.rvm/gems/ruby-2.3.6/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (61.5ms)
+
+
+Started GET "/posts/1" for 127.0.0.1 at 2018-09-06 10:10:59 -0700
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mPost Load (0.1ms)[0m  SELECT  "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered posts/show.html.erb within layouts/application (10.8ms)
+Completed 500 Internal Server Error in 18ms (ActiveRecord: 0.1ms)
+
+ActionView::Template::Error (undefined method `name' for nil:NilClass):
+    1: <%= @post.author.name %>
+    2: <%= @post.author.hometown %>
+    3: 
+    4: <h1><%= @post.title %></h1>
+  app/views/posts/show.html.erb:1:in `_app_views_posts_show_html_erb___878286066__619009338'
+
+
+  Rendered /home/learn/.rvm/gems/ruby-2.3.6/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (8.1ms)
+  Rendered /home/learn/.rvm/gems/ruby-2.3.6/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.4ms)
+  Rendered /home/learn/.rvm/gems/ruby-2.3.6/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.6ms)
+  Rendered /home/learn/.rvm/gems/ruby-2.3.6/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (47.5ms)
+
+
+Started GET "/posts/1/edit" for 127.0.0.1 at 2018-09-06 10:11:03 -0700
+Processing by PostsController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPost Load (0.1ms)[0m  [1mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered posts/edit.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 51ms (Views: 45.1ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/posts/1/edit" for 127.0.0.1 at 2018-09-06 10:18:33 -0700
+Processing by PostsController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mPost Load (0.1ms)[0m  SELECT  "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered posts/_form.html.erb (0.8ms)
+  Rendered posts/edit.html.erb within layouts/application (22.2ms)
+Completed 200 OK in 60ms (Views: 54.9ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/assets/application.self-e80e8f2318043e8af94dddc2adad5a4f09739a8ebb323b3ab31cd71d45fd9113.css?body=1" for 127.0.0.1 at 2018-09-06 10:18:33 -0700
+
+
+Started GET "/assets/jquery.self-bd7ddd393353a8d2480a622e80342adf488fb6006d667e8b42e4c0073393abee.js?body=1" for 127.0.0.1 at 2018-09-06 10:18:33 -0700
+
+
+Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for 127.0.0.1 at 2018-09-06 10:18:33 -0700
+
+
+Started GET "/assets/turbolinks.self-569ee74eaa15c1e2019317ff770b8769b1ec033a0f572a485f64c82ddc8f989e.js?body=1" for 127.0.0.1 at 2018-09-06 10:18:33 -0700
+
+
+Started GET "/assets/jquery_ujs.self-784a997f6726036b1993eb2217c9cb558e1cbb801c6da88105588c56f13b466a.js?body=1" for 127.0.0.1 at 2018-09-06 10:18:33 -0700
