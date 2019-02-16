@@ -773,3 +773,61 @@ Migrating to AddAuthorIdToPosts (20160119185429)
   [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20160119185429"]]
   [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
   [1m[35mActiveRecord::SchemaMigration Load (0.3ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+
+
+Started GET "/posts/new" for 127.0.0.1 at 2019-02-16 12:20:57 -0600
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by PostsController#new as HTML
+  Rendered posts/_form.html.erb (0.6ms)
+  Rendered posts/new.html.erb within layouts/application (11.2ms)
+Completed 200 OK in 726ms (Views: 660.4ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/assets/application.self-e80e8f2318043e8af94dddc2adad5a4f09739a8ebb323b3ab31cd71d45fd9113.css?body=1" for 127.0.0.1 at 2019-02-16 12:20:58 -0600
+
+
+Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for 127.0.0.1 at 2019-02-16 12:20:58 -0600
+
+
+Started GET "/posts/new" for 127.0.0.1 at 2019-02-16 12:22:48 -0600
+Processing by PostsController#new as HTML
+  Rendered posts/_form.html.erb (77.7ms)
+  Rendered posts/new.html.erb within layouts/application (88.4ms)
+Completed 500 Internal Server Error in 91ms (ActiveRecord: 0.0ms)
+
+ActionView::Template::Error (undefined local variable or method `f' for #<#<Class:0x0000558bf45e1728>:0x00007fad52410e90>):
+    1: <%= f.label :title %>
+    2: <%= f.text_field :title %>
+    3: <%= f.label :description %>
+    4: <%= f.text_field :description %>
+  app/views/posts/_form.html.erb:1:in `_app_views_posts__form_html_erb___1059146573014601715_70191193069440'
+  app/views/posts/new.html.erb:2:in `block in _app_views_posts_new_html_erb__2969358252979053915_70191185894040'
+  app/views/posts/new.html.erb:1:in `_app_views_posts_new_html_erb__2969358252979053915_70191185894040'
+
+
+  Rendered /home/brad/.rvm/gems/ruby-2.4.2/gems/actionpack-4.2.11/lib/action_dispatch/middleware/templates/rescues/_source.erb (12.0ms)
+  Rendered /home/brad/.rvm/gems/ruby-2.4.2/gems/actionpack-4.2.11/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (24.5ms)
+  Rendered /home/brad/.rvm/gems/ruby-2.4.2/gems/actionpack-4.2.11/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.3ms)
+  Rendered /home/brad/.rvm/gems/ruby-2.4.2/gems/actionpack-4.2.11/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (67.7ms)
+
+
+Started GET "/posts/new" for 127.0.0.1 at 2019-02-16 12:23:38 -0600
+Processing by PostsController#new as HTML
+  Rendered posts/_form.html.erb (0.5ms)
+  Rendered posts/new.html.erb within layouts/application (6.5ms)
+Completed 200 OK in 27ms (Views: 26.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.self-e80e8f2318043e8af94dddc2adad5a4f09739a8ebb323b3ab31cd71d45fd9113.css?body=1" for 127.0.0.1 at 2019-02-16 12:23:38 -0600
+
+
+Started GET "/assets/jquery.self-bd7ddd393353a8d2480a622e80342adf488fb6006d667e8b42e4c0073393abee.js?body=1" for 127.0.0.1 at 2019-02-16 12:23:38 -0600
+
+
+Started GET "/assets/jquery_ujs.self-784a997f6726036b1993eb2217c9cb558e1cbb801c6da88105588c56f13b466a.js?body=1" for 127.0.0.1 at 2019-02-16 12:23:38 -0600
+
+
+Started GET "/assets/turbolinks.self-569ee74eaa15c1e2019317ff770b8769b1ec033a0f572a485f64c82ddc8f989e.js?body=1" for 127.0.0.1 at 2019-02-16 12:23:38 -0600
+
+
+Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for 127.0.0.1 at 2019-02-16 12:23:38 -0600
