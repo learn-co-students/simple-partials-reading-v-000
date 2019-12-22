@@ -40,7 +40,7 @@ describe 'form' do
     expect(page).to have_content("My post title")
   end
 
-  it 'shows a new form that submits content and redirects and prints out params' do
+  it 'shows an edit form that submits content and redirects and prints out params' do
 
     visit edit_post_path(@post)
 
