@@ -27,10 +27,10 @@ This is the code in the `posts#new` form:
 
 <%= form_tag posts_path do %>
   <label>Post title:</label><br>
-  <%= text_field_tag :title %><br>
+  <%= text_field_tag :title, @post.title %><br>
 
   <label>Post Description</label><br>
-  <%= text_area_tag :description %><br>
+  <%= text_area_tag :description, @post.description %><br>
 
   <%= submit_tag "Submit Post" %>
 <% end %>
@@ -43,10 +43,10 @@ And this is the code in the `posts#edit` form:
 
 <%= form_tag post_path(@post), method: "put" do %>
   <label>Post title:</label><br>
-  <%= text_field_tag :title %><br>
+  <%= text_field_tag :title, @post.title %><br>
 
   <label>Post Description</label><br>
-  <%= text_area_tag :description %><br>
+  <%= text_area_tag :description, @post.description %><br>
 
   <%= submit_tag "Submit Post" %>
 <% end %>
@@ -79,10 +79,10 @@ So, now what? It looks like we are missing a bunch of code in our `posts/new` an
 First, we'll place the duplicated code in a new file called `app/views/posts/_form.html.erb`. The file should look as follows:
 ```erb
 <label>Post title:</label><br>
-<%= text_field_tag :title %><br>
+<%= text_field_tag :title, @post.title %><br>
 
 <label>Post Description</label><br>
-<%= text_area_tag :description %><br>
+<%= text_area_tag :description, @post.description %><br>
 
 <%= submit_tag "Submit Post" %>
 ```
@@ -116,7 +116,6 @@ A couple of things to note:
 2. We could have named the partial whatever we wanted to. The only requirements are that it start with an underscore and that references to the partial are made without the underscore. But, just like method names, it's good to make the names of our partials as commonsensical as possible.
 
 3. We were able to reference the partial by just calling `<%= render 'form' %>`.  Notice that we didn't specify the folder that the partial lives in, such as `<%= render 'posts/form' %>`. The reason we didn't need this (even though it would have worked if we had included it) is that both the `posts/new` and `posts/edit` files are referencing a partial housed in the same folder in which they reside, `app/views/posts`. When referencing a partial from a different folder, we must include the folder name as well (e.g., `<%= render 'posts/form' %>` as opposed to `<%= render 'form' %>`).
-
 
 ## Rendering a partial from a different folder
 
