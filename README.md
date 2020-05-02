@@ -9,7 +9,7 @@
 
 ## Introduction
 
-As you know, while coding we are generally trying to not repeat our code. If we see a repeated chunk of code in different methods, we sometimes extract that chunk of code into its own method, which we can then reference in multiple places.
+As you know, while coding we are generally trying not to repeat our code. If we see a repeated chunk of code in different methods, we sometimes extract that chunk of code into its own method, which we can then reference in multiple places.
 
 We can apply a similar tool to reduce repetition in HTML. Partials are view-level files that only form one part of an HTML page. By using a partial, we can remove repeated pieces of HTML and add better organization to the code in our views.
 
@@ -76,7 +76,7 @@ We left the code that is unique to each view and removed the duplicated code ins
 
 So, now what? It looks like we are missing a bunch of code in our `posts/new` and `posts/edit` files. Not to worry –– that's where our partial comes in handy.
 
-First, we'll place the duplicated code in a new file called `app/views/posts/_form.html.erb`. The file should look as follows:
+First, we'll place the duplicated code in our new `_form.html.erb` file. The file should look as follows:
 ```erb
 <label>Post title:</label><br>
 <%= text_field_tag :title, @post.title %><br>
