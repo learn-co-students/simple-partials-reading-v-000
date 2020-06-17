@@ -1,5 +1,5 @@
-<%= @post.author.name %>
-<%= @post.author.hometown %>
+<!-- need to specify folder if it's not root, AND add instance variable to controller -->
+<%= render 'authors/author' %>
 
 <h1><%= @post.title %></h1>
 <p><%= @post.description %></p>
