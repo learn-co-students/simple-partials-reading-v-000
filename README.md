@@ -1,6 +1,6 @@
 # Simple Partials
 
-## Objectives
+## Objectives #
 
 1. Explain why partials are used
 2. Use Rails's `render` method to render a partial
