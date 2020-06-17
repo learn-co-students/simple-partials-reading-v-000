@@ -33,11 +33,11 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
-  gem 'pry-byebug'
+  # gem 'pry-byebug', '~> 3.6'
   gem 'rspec-rails', '~> 3.7'
   gem 'capybara'
   gem 'database_cleaner'
-  gem 'annotate'
+  # gem 'annotate'
 end
 
 group :development do
