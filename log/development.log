@@ -773,3 +773,395 @@ Migrating to AddAuthorIdToPosts (20160119185429)
   [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20160119185429"]]
   [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
   [1m[35mActiveRecord::SchemaMigration Load (0.3ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (1.4ms)[0m  [1mINSERT INTO "authors" ("name", "hometown", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "John Grisham"], ["hometown", "Charlottesville, VA"], ["created_at", "2018-06-14 19:06:57.503201"], ["updated_at", "2018-06-14 19:06:57.503201"]]
+  [1m[35m (1.7ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "authors" ("name", "hometown", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["name", " Renyolds Price"], ["hometown", "Macon, NC"], ["created_at", "2018-06-14 19:06:57.509108"], ["updated_at", "2018-06-14 19:06:57.509108"]]
+  [1m[36m (1.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.8ms)[0m  [1mINSERT INTO "posts" ("title", "description", "author_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["title", "A Time To Kill"], ["description", "A Time to Kill is a 1989 legal suspense thriller by John Grisham. It was Grisham's first novel. The novel was rejected by many publishers before Wynwood Press (located in New York) eventually gave it a modest 5,000-copy printing. After The Firm, The Pelican Brief, and The Client became bestsellers, interest in A Time to Kill grew; the book was republished by Doubleday in hardcover and, later, by Dell Publishing in paperback, and itself became a bestseller. This made Grisham extremely popular among readers."], ["author_id", 1], ["created_at", "2018-06-14 19:06:57.528783"], ["updated_at", "2018-06-14 19:06:57.528783"]]
+  [1m[35m (1.7ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "posts" ("title", "description", "author_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["title", "A Long and Happy Life"], ["description", "A Long and Happy Life presents Rosacoke Mustian to the reading public, as well as her erstwhile boyfriend, Wesley Beavers, who gets the innocent girl pregnant. Although he condescends to marry her, he then pretty much leaves her on her own. The book is alive with local color. In one of the early, most memorable scenes, Rosacoke needs to attend a funeral at a black church on a sizzling day in summer. Her friend Mildred Sutton has died in childbirth and is to be eulogized. Wesley Beavers drives his noisy motorcycle up to deliver Rosacoke to the funeral, but he does not go inside. Instead, he lingers outside and polishes his motorcycle, which is an extension of his being. Before the services are over, he leaves precipitously to get ready for the church picnic that he and Rosacoke are to attend that afternoon. As he screeches away from the church, he raises a trail of red dust behind him that one can almost taste, so vivid is Price’s description."], ["author_id", 2], ["created_at", "2018-06-14 19:06:57.533362"], ["updated_at", "2018-06-14 19:06:57.533362"]]
+  [1m[36m (1.3ms)[0m  [1mcommit transaction[0m
+
+
+Started GET "/" for ::1 at 2018-06-14 14:27:41 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendered /Users/deborahseow/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/templates/rails/welcome/index.html.erb (2.8ms)
+Completed 200 OK in 44ms (Views: 22.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/posts" for ::1 at 2018-06-14 14:27:44 -0500
+Processing by PostsController#index as HTML
+  [1m[35mPost Load (1.1ms)[0m  SELECT "posts".* FROM "posts"
+  Rendered posts/index.html.erb within layouts/application (10.2ms)
+Completed 200 OK in 585ms (Views: 575.4ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/assets/application.self-e80e8f2318043e8af94dddc2adad5a4f09739a8ebb323b3ab31cd71d45fd9113.css?body=1" for ::1 at 2018-06-14 14:27:45 -0500
+
+
+Started GET "/assets/jquery_ujs.self-784a997f6726036b1993eb2217c9cb558e1cbb801c6da88105588c56f13b466a.js?body=1" for ::1 at 2018-06-14 14:27:45 -0500
+
+
+Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for ::1 at 2018-06-14 14:27:45 -0500
+
+
+Started GET "/assets/turbolinks.self-2db6ec539b9190f75e1d477b305df53d12904d5cafdd47c7ffd91ba25cbec128.js?body=1" for ::1 at 2018-06-14 14:27:45 -0500
+
+
+Started GET "/assets/jquery.self-bd7ddd393353a8d2480a622e80342adf488fb6006d667e8b42e4c0073393abee.js?body=1" for ::1 at 2018-06-14 14:27:45 -0500
+
+
+Started GET "/posts/new" for ::1 at 2018-06-14 14:27:46 -0500
+Processing by PostsController#new as HTML
+  Rendered posts/new.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 46ms (Views: 43.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/posts/new" for ::1 at 2018-06-14 14:27:52 -0500
+Processing by PostsController#new as HTML
+  Rendered posts/new.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 20ms (Views: 19.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/posts/new" for ::1 at 2018-06-14 14:29:36 -0500
+Processing by PostsController#new as HTML
+  Rendered posts/_form.html.erb (4.2ms)
+  Rendered posts/new.html.erb within layouts/application (28.3ms)
+Completed 200 OK in 73ms (Views: 70.3ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/posts" for ::1 at 2018-06-14 14:29:54 -0500
+Processing by PostsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Mq4C260y1oYZx1ysvdt2xK+2lm7L/J3rH5ibtgvIOe6I6RhBFyyWsNNqag3Elll/i7j2u6Ttitj43KaGVbw6ng==", "title"=>"New Post 1", "description"=>"Testing", "commit"=>"Submit Post"}
+  [1m[36mAuthor Load (0.7ms)[0m  [1mSELECT  "authors".* FROM "authors"  ORDER BY "authors"."id" ASC LIMIT 1[0m
+  [1m[35m (0.4ms)[0m  begin transaction
+  [1m[36mSQL (3.8ms)[0m  [1mINSERT INTO "posts" ("title", "description", "author_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["title", "New Post 1"], ["description", "Testing"], ["author_id", 1], ["created_at", "2018-06-14 19:29:54.693344"], ["updated_at", "2018-06-14 19:29:54.693344"]]
+  [1m[35m (2.1ms)[0m  commit transaction
+Redirected to http://localhost:3000/posts/11
+Completed 302 Found in 80ms (ActiveRecord: 8.0ms)
+
+
+Started GET "/posts/11" for ::1 at 2018-06-14 14:29:54 -0500
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"11"}
+  [1m[36mPost Load (0.3ms)[0m  [1mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT 1[0m  [["id", 11]]
+  [1m[35mAuthor Load (0.3ms)[0m  SELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered posts/show.html.erb within layouts/application (21.7ms)
+Completed 200 OK in 70ms (Views: 52.3ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/posts/1" for ::1 at 2018-06-14 14:30:03 -0500
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPost Load (0.2ms)[0m  [1mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered posts/show.html.erb within layouts/application (12.7ms)
+Completed 500 Internal Server Error in 29ms (ActiveRecord: 0.2ms)
+
+ActionView::Template::Error (undefined method `name' for nil:NilClass):
+    1: <%= @post.author.name %>
+    2: <%= @post.author.hometown %>
+    3: 
+    4: <h1><%= @post.title %></h1>
+  app/views/posts/show.html.erb:1:in `_app_views_posts_show_html_erb___4231755350802767010_70187033290080'
+
+
+  Rendered /Users/deborahseow/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (14.5ms)
+  Rendered /Users/deborahseow/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (12.2ms)
+  Rendered /Users/deborahseow/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (2.0ms)
+  Rendered /Users/deborahseow/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (137.1ms)
+
+
+Started GET "/posts/new" for ::1 at 2018-06-14 14:30:04 -0500
+Processing by PostsController#new as HTML
+  Rendered posts/_form.html.erb (0.7ms)
+  Rendered posts/new.html.erb within layouts/application (10.3ms)
+Completed 200 OK in 52ms (Views: 50.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2018-06-15 20:17:05 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendered /Users/deborahseow/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/templates/rails/welcome/index.html.erb (3.6ms)
+Completed 200 OK in 38ms (Views: 21.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/posts" for ::1 at 2018-06-15 20:17:30 -0500
+Processing by PostsController#index as HTML
+  [1m[35mAuthor Load (0.8ms)[0m  SELECT "authors".* FROM "authors"
+  [1m[36mPost Load (1.6ms)[0m  [1mSELECT "posts".* FROM "posts"[0m
+  Rendered posts/index.html.erb within layouts/application (23.3ms)
+Completed 200 OK in 434ms (Views: 422.9ms | ActiveRecord: 3.2ms)
+
+
+Started GET "/assets/jquery.self-bd7ddd393353a8d2480a622e80342adf488fb6006d667e8b42e4c0073393abee.js?body=1" for ::1 at 2018-06-15 20:17:31 -0500
+
+
+Started GET "/assets/jquery_ujs.self-784a997f6726036b1993eb2217c9cb558e1cbb801c6da88105588c56f13b466a.js?body=1" for ::1 at 2018-06-15 20:17:31 -0500
+
+
+Started GET "/assets/turbolinks.self-2db6ec539b9190f75e1d477b305df53d12904d5cafdd47c7ffd91ba25cbec128.js?body=1" for ::1 at 2018-06-15 20:17:31 -0500
+
+
+Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for ::1 at 2018-06-15 20:17:31 -0500
+
+
+Started GET "/posts?utf8=%E2%9C%93&author=3&commit=Filter" for ::1 at 2018-06-15 20:17:41 -0500
+Processing by PostsController#index as HTML
+  Parameters: {"utf8"=>"✓", "author"=>"3", "commit"=>"Filter"}
+  [1m[35mAuthor Load (0.3ms)[0m  SELECT "authors".* FROM "authors"
+  [1m[36mPost Load (0.4ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE "posts"."author_id" = 3[0m
+  Rendered posts/index.html.erb within layouts/application (8.8ms)
+Completed 200 OK in 34ms (Views: 31.6ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/posts?utf8=%E2%9C%93&author=3&commit=Filter" for ::1 at 2018-06-15 20:17:47 -0500
+Processing by PostsController#index as HTML
+  Parameters: {"utf8"=>"✓", "author"=>"3", "commit"=>"Filter"}
+  [1m[35mAuthor Load (0.2ms)[0m  SELECT "authors".* FROM "authors"
+  [1m[36mPost Load (0.2ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE "posts"."author_id" = 3[0m
+  Rendered posts/index.html.erb within layouts/application (2.5ms)
+Completed 200 OK in 38ms (Views: 37.2ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/posts?utf8=%E2%9C%93&author=2&commit=Filter" for ::1 at 2018-06-15 20:17:59 -0500
+Processing by PostsController#index as HTML
+  Parameters: {"utf8"=>"✓", "author"=>"2", "commit"=>"Filter"}
+  [1m[35mAuthor Load (0.3ms)[0m  SELECT "authors".* FROM "authors"
+  [1m[36mPost Load (0.2ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE "posts"."author_id" = 2[0m
+  Rendered posts/index.html.erb within layouts/application (4.5ms)
+Completed 200 OK in 51ms (Views: 49.7ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/posts?utf8=%E2%9C%93&author=1&commit=Filter" for ::1 at 2018-06-15 20:18:04 -0500
+Processing by PostsController#index as HTML
+  Parameters: {"utf8"=>"✓", "author"=>"1", "commit"=>"Filter"}
+  [1m[35mAuthor Load (0.2ms)[0m  SELECT "authors".* FROM "authors"
+  [1m[36mPost Load (0.2ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE "posts"."author_id" = 1[0m
+  Rendered posts/index.html.erb within layouts/application (4.7ms)
+Completed 200 OK in 36ms (Views: 35.3ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/posts?utf8=%E2%9C%93&author=5&commit=Filter" for ::1 at 2018-06-15 20:18:07 -0500
+Processing by PostsController#index as HTML
+  Parameters: {"utf8"=>"✓", "author"=>"5", "commit"=>"Filter"}
+  [1m[35mAuthor Load (0.1ms)[0m  SELECT "authors".* FROM "authors"
+  [1m[36mPost Load (0.7ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE "posts"."author_id" = 5[0m
+  Rendered posts/index.html.erb within layouts/application (2.9ms)
+Completed 200 OK in 30ms (Views: 26.8ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/posts?utf8=%E2%9C%93&author=4&commit=Filter" for ::1 at 2018-06-15 20:18:10 -0500
+Processing by PostsController#index as HTML
+  Parameters: {"utf8"=>"✓", "author"=>"4", "commit"=>"Filter"}
+  [1m[35mAuthor Load (0.4ms)[0m  SELECT "authors".* FROM "authors"
+  [1m[36mPost Load (0.2ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE "posts"."author_id" = 4[0m
+  Rendered posts/index.html.erb within layouts/application (2.6ms)
+Completed 200 OK in 21ms (Views: 19.5ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/posts?utf8=%E2%9C%93&author=1&commit=Filter" for ::1 at 2018-06-15 20:18:12 -0500
+Processing by PostsController#index as HTML
+  Parameters: {"utf8"=>"✓", "author"=>"1", "commit"=>"Filter"}
+  [1m[35mAuthor Load (0.3ms)[0m  SELECT "authors".* FROM "authors"
+  [1m[36mPost Load (0.2ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE "posts"."author_id" = 1[0m
+  Rendered posts/index.html.erb within layouts/application (2.4ms)
+Completed 200 OK in 23ms (Views: 21.0ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/posts" for ::1 at 2018-06-15 20:27:38 -0500
+Processing by PostsController#index as HTML
+  [1m[35mAuthor Load (2.0ms)[0m  SELECT "authors".* FROM "authors"
+  [1m[36mPost Load (0.4ms)[0m  [1mSELECT "posts".* FROM "posts"[0m
+  Rendered posts/index.html.erb within layouts/application (32.1ms)
+Completed 200 OK in 97ms (Views: 82.9ms | ActiveRecord: 2.4ms)
+
+
+Started GET "/posts" for ::1 at 2018-06-15 20:27:47 -0500
+Processing by PostsController#index as HTML
+  [1m[35mAuthor Load (0.6ms)[0m  SELECT "authors".* FROM "authors"
+  [1m[36mPost Load (0.4ms)[0m  [1mSELECT "posts".* FROM "posts"[0m
+  Rendered posts/index.html.erb within layouts/application (4.3ms)
+Completed 200 OK in 39ms (Views: 37.5ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/posts?utf8=%E2%9C%93&author=3&commit=Filter" for ::1 at 2018-06-15 20:28:12 -0500
+Processing by PostsController#index as HTML
+  Parameters: {"utf8"=>"✓", "author"=>"3", "commit"=>"Filter"}
+  [1m[35mAuthor Load (0.6ms)[0m  SELECT "authors".* FROM "authors"
+  [1m[36mPost Load (0.2ms)[0m  [1mSELECT "posts".* FROM "posts"[0m
+  Rendered posts/index.html.erb within layouts/application (4.7ms)
+Completed 200 OK in 35ms (Views: 33.1ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/posts?utf8=%E2%9C%93&author=3&commit=Filter" for ::1 at 2018-06-15 20:29:22 -0500
+Processing by PostsController#index as HTML
+  Parameters: {"utf8"=>"✓", "author"=>"3", "commit"=>"Filter"}
+  [1m[35mAuthor Load (1.9ms)[0m  SELECT "authors".* FROM "authors"
+  [1m[36mPost Load (0.3ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE "posts"."author_id" = 3[0m
+  Rendered posts/index.html.erb within layouts/application (24.3ms)
+Completed 200 OK in 93ms (Views: 82.3ms | ActiveRecord: 2.1ms)
+
+
+Started GET "/posts?utf8=%E2%9C%93&author=1&commit=Filter" for ::1 at 2018-06-15 20:29:44 -0500
+Processing by PostsController#index as HTML
+  Parameters: {"utf8"=>"✓", "author"=>"1", "commit"=>"Filter"}
+  [1m[35mPost Load (8.4ms)[0m  SELECT "posts".* FROM "posts" WHERE "posts"."author_id" = 1
+  [1m[36mAuthor Load (1.7ms)[0m  [1mSELECT "authors".* FROM "authors"[0m
+  Rendered posts/index.html.erb within layouts/application (123007.5ms)
+Completed 200 OK in 123059ms (Views: 123046.8ms | ActiveRecord: 10.1ms)
+
+
+Started GET "/posts?utf8=%E2%9C%93&author=1&commit=Filter" for ::1 at 2018-06-15 20:32:01 -0500
+Processing by PostsController#index as HTML
+  Parameters: {"utf8"=>"✓", "author"=>"1", "commit"=>"Filter"}
+  [1m[35mAuthor Load (1.1ms)[0m  SELECT "authors".* FROM "authors"
+  [1m[36mPost Load (0.3ms)[0m  [1mSELECT "posts".* FROM "posts"[0m
+  Rendered posts/index.html.erb within layouts/application (6.8ms)
+Completed 200 OK in 40ms (Views: 36.7ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/posts?utf8=%E2%9C%93&author=5&commit=Filter" for ::1 at 2018-06-15 20:32:06 -0500
+Processing by PostsController#index as HTML
+  Parameters: {"utf8"=>"✓", "author"=>"5", "commit"=>"Filter"}
+  [1m[35mAuthor Load (0.2ms)[0m  SELECT "authors".* FROM "authors"
+  [1m[36mPost Load (0.3ms)[0m  [1mSELECT "posts".* FROM "posts"[0m
+  Rendered posts/index.html.erb within layouts/application (3.2ms)
+Completed 200 OK in 27ms (Views: 26.2ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/posts?utf8=%E2%9C%93&author=1&commit=Filter" for ::1 at 2018-06-15 20:32:09 -0500
+Processing by PostsController#index as HTML
+  Parameters: {"utf8"=>"✓", "author"=>"1", "commit"=>"Filter"}
+  [1m[35mAuthor Load (0.7ms)[0m  SELECT "authors".* FROM "authors"
+  [1m[36mPost Load (0.3ms)[0m  [1mSELECT "posts".* FROM "posts"[0m
+  Rendered posts/index.html.erb within layouts/application (5.2ms)
+Completed 200 OK in 40ms (Views: 37.5ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/posts" for ::1 at 2018-06-15 20:42:22 -0500
+Processing by PostsController#index as HTML
+  [1m[35mAuthor Load (2.4ms)[0m  SELECT "authors".* FROM "authors"
+  [1m[36mPost Load (1.4ms)[0m  [1mSELECT "posts".* FROM "posts"[0m
+  Rendered posts/index.html.erb within layouts/application (30.7ms)
+Completed 200 OK in 120ms (Views: 99.8ms | ActiveRecord: 4.9ms)
+
+
+Started GET "/posts?utf8=%E2%9C%93&author=1&date=Old+News&commit=Filter" for ::1 at 2018-06-15 20:42:29 -0500
+Processing by PostsController#index as HTML
+  Parameters: {"utf8"=>"✓", "author"=>"1", "date"=>"Old News", "commit"=>"Filter"}
+  [1m[35mAuthor Load (0.5ms)[0m  SELECT "authors".* FROM "authors"
+  [1m[36mPost Load (1.1ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE "posts"."author_id" = 1[0m
+  Rendered posts/index.html.erb within layouts/application (7.1ms)
+Completed 200 OK in 104ms (Views: 100.0ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/posts?utf8=%E2%9C%93&author=2&date=Today&commit=Filter" for ::1 at 2018-06-15 20:42:34 -0500
+Processing by PostsController#index as HTML
+  Parameters: {"utf8"=>"✓", "author"=>"2", "date"=>"Today", "commit"=>"Filter"}
+  [1m[35mAuthor Load (0.2ms)[0m  SELECT "authors".* FROM "authors"
+  [1m[36mPost Load (0.2ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE "posts"."author_id" = 2[0m
+  Rendered posts/index.html.erb within layouts/application (2.9ms)
+Completed 200 OK in 35ms (Views: 31.5ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/posts?utf8=%E2%9C%93&author=&date=Today&commit=Filter" for ::1 at 2018-06-15 20:42:39 -0500
+Processing by PostsController#index as HTML
+  Parameters: {"utf8"=>"✓", "author"=>"", "date"=>"Today", "commit"=>"Filter"}
+  [1m[35mAuthor Load (0.4ms)[0m  SELECT "authors".* FROM "authors"
+  [1m[36mPost Load (1.2ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE (created_at >='2018-06-16 00:00:00.000000')[0m
+  Rendered posts/index.html.erb within layouts/application (3.9ms)
+Completed 200 OK in 43ms (Views: 36.2ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/posts?utf8=%E2%9C%93&author=1&date=Today&commit=Filter" for ::1 at 2018-06-15 20:42:45 -0500
+Processing by PostsController#index as HTML
+  Parameters: {"utf8"=>"✓", "author"=>"1", "date"=>"Today", "commit"=>"Filter"}
+  [1m[35mAuthor Load (0.2ms)[0m  SELECT "authors".* FROM "authors"
+  [1m[36mPost Load (0.2ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE "posts"."author_id" = 1[0m
+  Rendered posts/index.html.erb within layouts/application (2.7ms)
+Completed 200 OK in 26ms (Views: 24.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/posts?utf8=%E2%9C%93&author=1&date=Old+News&commit=Filter" for ::1 at 2018-06-15 20:42:49 -0500
+Processing by PostsController#index as HTML
+  Parameters: {"utf8"=>"✓", "author"=>"1", "date"=>"Old News", "commit"=>"Filter"}
+  [1m[35mAuthor Load (0.2ms)[0m  SELECT "authors".* FROM "authors"
+  [1m[36mPost Load (0.2ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE "posts"."author_id" = 1[0m
+  Rendered posts/index.html.erb within layouts/application (2.9ms)
+Completed 200 OK in 27ms (Views: 24.2ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/posts?utf8=%E2%9C%93&author=&date=Today&commit=Filter" for ::1 at 2018-06-15 20:45:34 -0500
+Processing by PostsController#index as HTML
+  Parameters: {"utf8"=>"✓", "author"=>"", "date"=>"Today", "commit"=>"Filter"}
+  [1m[35mAuthor Load (4.0ms)[0m  SELECT "authors".* FROM "authors"
+  [1m[36mPost Load (4.0ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE (created_at >='2018-06-16 00:00:00.000000')[0m
+  Rendered posts/index.html.erb within layouts/application (28.6ms)
+Completed 200 OK in 113ms (Views: 77.0ms | ActiveRecord: 9.5ms)
+
+
+Started GET "/posts?utf8=%E2%9C%93&author=&date=Old+News&commit=Filter" for ::1 at 2018-06-15 20:45:38 -0500
+Processing by PostsController#index as HTML
+  Parameters: {"utf8"=>"✓", "author"=>"", "date"=>"Old News", "commit"=>"Filter"}
+  [1m[35mAuthor Load (0.2ms)[0m  SELECT "authors".* FROM "authors"
+  [1m[36mPost Load (0.3ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE (created_at <'2018-06-16 00:00:00.000000')[0m
+  Rendered posts/index.html.erb within layouts/application (11.0ms)
+Completed 200 OK in 53ms (Views: 50.6ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/posts?utf8=%E2%9C%93&author=&date=Old+News&commit=Filter" for ::1 at 2018-06-15 20:56:11 -0500
+Processing by PostsController#index as HTML
+  Parameters: {"utf8"=>"✓", "author"=>"", "date"=>"Old News", "commit"=>"Filter"}
+  [1m[35mAuthor Load (4.0ms)[0m  SELECT "authors".* FROM "authors"
+  [1m[36mPost Load (1.2ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE (created_at <'2018-06-16 00:00:00.000000')[0m
+  Rendered posts/index.html.erb within layouts/application (43.4ms)
+Completed 200 OK in 139ms (Views: 109.2ms | ActiveRecord: 6.6ms)
+
+
+Started GET "/posts?utf8=%E2%9C%93&author=1&date=&commit=Filter" for ::1 at 2018-06-15 20:56:15 -0500
+Processing by PostsController#index as HTML
+  Parameters: {"utf8"=>"✓", "author"=>"1", "date"=>"", "commit"=>"Filter"}
+  [1m[35mAuthor Load (0.2ms)[0m  SELECT "authors".* FROM "authors"
+  [1m[36mPost Load (0.1ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE "posts"."author_id" = 1[0m
+  Rendered posts/index.html.erb within layouts/application (2.6ms)
+Completed 200 OK in 28ms (Views: 24.4ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/posts?utf8=%E2%9C%93&author=&date=Today&commit=Filter" for ::1 at 2018-06-15 20:56:21 -0500
+Processing by PostsController#index as HTML
+  Parameters: {"utf8"=>"✓", "author"=>"", "date"=>"Today", "commit"=>"Filter"}
+Completed 500 Internal Server Error in 15ms (ActiveRecord: 0.0ms)
+
+NoMethodError (undefined method `from_tday' for #<Class:0x007fabfd8b6518>
+Did you mean?  from_today):
+  app/controllers/posts_controller.rb:11:in `index'
+
+
+  Rendered /Users/deborahseow/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (4.7ms)
+  Rendered /Users/deborahseow/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (5.1ms)
+  Rendered /Users/deborahseow/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.7ms)
+  Rendered /Users/deborahseow/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (123.3ms)
+
+
+Started GET "/posts?utf8=%E2%9C%93&author=&date=Today&commit=Filter" for ::1 at 2018-06-15 20:56:29 -0500
+Processing by PostsController#index as HTML
+  Parameters: {"utf8"=>"✓", "author"=>"", "date"=>"Today", "commit"=>"Filter"}
+  [1m[35mAuthor Load (0.7ms)[0m  SELECT "authors".* FROM "authors"
+  [1m[36mPost Load (1.2ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE (created_at >='2018-06-16 00:00:00.000000')[0m
+  Rendered posts/index.html.erb within layouts/application (13.1ms)
+Completed 200 OK in 62ms (Views: 44.5ms | ActiveRecord: 2.6ms)
+
+
+Started GET "/posts?utf8=%E2%9C%93&author=&date=Today&commit=Filter" for ::1 at 2018-06-15 20:56:33 -0500
+Processing by PostsController#index as HTML
+  Parameters: {"utf8"=>"✓", "author"=>"", "date"=>"Today", "commit"=>"Filter"}
+  [1m[35mAuthor Load (0.4ms)[0m  SELECT "authors".* FROM "authors"
+  [1m[36mPost Load (1.6ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE (created_at >='2018-06-16 00:00:00.000000')[0m
+  Rendered posts/index.html.erb within layouts/application (15.1ms)
+Completed 200 OK in 68ms (Views: 63.0ms | ActiveRecord: 1.9ms)
