@@ -3,8 +3,9 @@ class PostsController < ApplicationController
     @posts = Post.all
   end
 
-  def show
+  def show 
     @post = Post.find(params[:id])
+    @author = @post.author
   end
 
   def new
